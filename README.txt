@@ -35,3 +35,6 @@ from s1 that are present in s2.
 
 11) stack.C - Implementation of a stack data structure using C++ template
 list.
+
+12) rotate.C - Rotate a given string n times in linear time and constant
+space. "n" can be greater than the string length.
