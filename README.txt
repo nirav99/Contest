@@ -38,3 +38,5 @@ list.
 
 12) rotate.C - Rotate a given string n times in linear time and constant
 space. "n" can be greater than the string length.
+
+13) maxSubseqSum.C - Find maximum subsequence sum in a series in O(n) time.
