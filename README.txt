@@ -40,3 +40,14 @@ list.
 space. "n" can be greater than the string length.
 
 13) maxSubseqSum.C - Find maximum subsequence sum in a series in O(n) time.
+
+14) gameOfLife.C - This implements the game of life function. Given an array
+of game board, write a function to arrive at a new state of the board based on
+the following conditions :
+  a) Each cell has a value 1 or 0 namely, 1 being alive and 0 dead.
+  b) Each cell's new state is determined as
+     If a cell has 3 alive neighbors, that cell is alive
+     If a cell has 2 alive neighbors, its state remains unchanged
+     Otherwise it's state is dead.
+  c) The new state should be independent of the manner in which the board
+     matrix is traversed.
