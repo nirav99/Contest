@@ -51,3 +51,9 @@ the following conditions :
      Otherwise it's state is dead.
   c) The new state should be independent of the manner in which the board
      matrix is traversed.
+
+15) Anagrams.java - Given a set of words on the command line, determine if
+these words are anagrams of each other. A word is an anagram of another word
+if it has exactly the same characters as the other word, but possibly a
+different order, e.g. the words stop, pots and tops are anagrams of each
+other.
