@@ -57,3 +57,7 @@ these words are anagrams of each other. A word is an anagram of another word
 if it has exactly the same characters as the other word, but possibly a
 different order, e.g. the words stop, pots and tops are anagrams of each
 other.
+
+16) SuffixArray.java - Search a string (or text) using Suffix Array
+Build a suffix array of the string and search for a specific substring using
+binary search on the suffix array.
