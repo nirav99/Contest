@@ -61,3 +61,7 @@ other.
 16) SuffixArray.java - Search a string (or text) using Suffix Array
 Build a suffix array of the string and search for a specific substring using
 binary search on the suffix array.
+
+17) ExtractEmbedCode.java - Given a set of text files, each containing one URL
+per line. Some URLs contain the query string "embedCode", retrieve the value
+of embedCode and report unique values.
