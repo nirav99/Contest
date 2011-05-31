@@ -19,6 +19,10 @@ public class RequestListener implements Runnable
   private int bindingPort                    = 12345;
   private LogServer logServer                = null;
   
+  /**
+   * Class constructor
+   * @throws Exception
+   */
   public RequestListener(LogServer logServer, LinkedList<LogMessage> msgList)
          throws Exception
   {

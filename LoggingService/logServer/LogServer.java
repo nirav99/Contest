@@ -18,8 +18,8 @@ public class LogServer
   
   public LogServer()
   {
-	  try
-	  {
+    try
+    {
       messageList = new LinkedList<LogMessage>();
 
       System.out.println("Starting request listener");
@@ -31,11 +31,11 @@ public class LogServer
       System.out.println("Starting request processor");
       processor   = new RequestProcessor(this, messageList);
 	  }
-	  catch(Exception e)
-	  {
+    catch(Exception e)
+    {
       System.err.println(e.getMessage());
       e.printStackTrace();
-	  }
+    }
   }
   
   public static void main(String args[])
