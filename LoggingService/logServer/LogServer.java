@@ -30,7 +30,7 @@ public class LogServer
       
       System.out.println("Starting request processor");
       processor   = new RequestProcessor(this, messageList);
-	  }
+    }
     catch(Exception e)
     {
       System.err.println(e.getMessage());
