@@ -65,3 +65,6 @@ binary search on the suffix array.
 17) ExtractEmbedCode.java - Given a set of text files, each containing one URL
 per line. Some URLs contain the query string "embedCode", retrieve the value
 of embedCode and report unique values.
+
+18) EditDistance.java - Given a set of strings, find all pairs of strings that
+are less than edit distance 2 from each other.
