@@ -34,7 +34,8 @@ public class EditDistance
       {
         if(false == dist2Apart(stringList.get(i), stringList.get(j)))
         {
-          System.err.println("Strings " + stringList.get(i) + " " + stringList.get(j) + " are not dist-2 apart");
+          System.err.println("Strings " + stringList.get(i) + " " + stringList.get(j) + " are not dist-k apart");
+          System.err.println("k = " + minEditDistance);
           error = true;
         }
       }
@@ -79,6 +80,11 @@ public class EditDistance
    */
   public static void main(String[] args)
   {
+    if(args.length != 1)
+    {
+      printUsage();
+      System.exit(-1);
+    }
     try
     {
       EditDistance ed = new EditDistance(args[0]);
@@ -88,6 +94,14 @@ public class EditDistance
       System.err.println(e.getMessage());
       e.printStackTrace();
     }
+  }
+
+  public static void printUsage()
+  {
+    System.err.println("Usage:");
+    System.err.println("java EditDistance FileName");
+    System.err.print("FileName - File containing the strings to check, one");
+    System.err.println(" string per line");
   }
 }
 
