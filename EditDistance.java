@@ -34,8 +34,7 @@ public class EditDistance
       {
         if(false == dist2Apart(stringList.get(i), stringList.get(j)))
         {
-          System.err.println("Strings " + stringList.get(i) + " " + stringList.get(j) + " are not dist-k apart");
-          System.err.println("k = " + minEditDistance);
+          System.err.println("Strings " + stringList.get(i) + " " + stringList.get(j) + " are not dist-" + minEditDistance + " apart");
           error = true;
         }
       }
