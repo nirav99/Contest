@@ -1,5 +1,6 @@
 /**
- * 
+ * Class to traverse a matrix in a spiral manner. This code needs to be optimized, it is just the implementation
+ * of my working algorithm. 
  */
 
 /**
@@ -14,10 +15,10 @@ public class MatrixTraversal
   
   public MatrixTraversal(int rows, int cols) throws Exception
   {
-	this.rows = rows;
-	this.cols = cols;
+    this.rows = rows;
+    this.cols = cols;
 	
-	if(rows < 1 || cols < 1)
+    if(rows < 1 || cols < 1)
       throw new Exception("Invalid array bounds");
 	
     a = new int[rows][cols];
