@@ -43,6 +43,10 @@ public class MatrixAllPaths
   public void findPaths()
   {
     System.out.println("Paths :");
+
+    if(rows == 1 && cols == 1)
+      System.out.println(matrix[0][0]);
+
     int writePos = 1;
     path[0] = matrix[0][0];
     if(rows > 1)
