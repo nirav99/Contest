@@ -1,6 +1,5 @@
 Common Programming Problems and their Solutions
 
-
 1) Permute.C - Find permutations and combinations of a given string. The string
 is passed as a command line parameter.
 
