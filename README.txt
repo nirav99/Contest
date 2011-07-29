@@ -71,4 +71,5 @@ are less than edit distance 2 from each other.
 
 19) MatrixTraversal.java - Traverse a 2D matrix in a spiral order.
 
-20) MatrixAllPaths.java - Print all the paths in a 2D matrix from top-left to bottom-right when only two operations move_down and move_right are allowed.
+20) MatrixAllPaths.java - Print all the paths in a 2D matrix from top-left to 
+bottom-right when only two operations move_down and move_right are allowed.
