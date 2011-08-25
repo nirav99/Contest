@@ -54,7 +54,7 @@ public class NQueenProblem
   }
   
   /**
-   * Method to play the game of placing the queens
+   * Method to place the queens on the board
    */
   public void play()
   {
@@ -66,6 +66,9 @@ public class NQueenProblem
     }
   }
   
+  /**
+   * Method implementing recursion
+   */
   private void playRecursive(int queenNum)
   {
     if(queenNum >= rows)
@@ -126,10 +129,10 @@ public class NQueenProblem
 			sum = 0;
 			for(int startR = i, startC = 0; startR < rows && startC < cols; startR++, startC++)
 			{ 
-           sum += board[startR][startC];
-           if(sum > 1)
-					   return false;
-        }
+        sum += board[startR][startC];
+        if(sum > 1)
+          return false;
+      }
     }
     
     //2nd set of diagonals
@@ -140,7 +143,7 @@ public class NQueenProblem
       {
         sum += board[startR][startC];
         if(sum > 1)
-					return false;
+          return false;
       }
     }
     
@@ -150,7 +153,7 @@ public class NQueenProblem
       sum = 0;
       for(int startC = cols -1, startR = i; startR < rows && startC >= 0; startR++, startC--)
       {
-			sum += board[startR][startC];
+        sum += board[startR][startC];
         if(sum > 1)
           return false;
       }
@@ -179,13 +182,13 @@ public class NQueenProblem
       System.exit(-1);
     }
     
-	int size = Integer.parseInt(args[0]);
+    int size = Integer.parseInt(args[0]);
 	
-	if(size == 2 || size == 3)
-	{
+    if(size == 2 || size == 3)
+    {
       System.out.println("No solution exists for board size " + size);
       System.exit(0);
-	}
+   	}
 	
     NQueenProblem p = new NQueenProblem(size, size);
     p.play();
