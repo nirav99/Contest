@@ -74,7 +74,7 @@ are less than edit distance 2 from each other.
 20) MatrixAllPaths.java - Print all the paths in a 2D matrix from top-left to 
 bottom-right when only two operations move_down and move_right are allowed.
 
-21) NQueenProblem.java - Code to show one solution of placing N queens on an NxN
+21) NQueenProblem.java - Code to find all solutions of placing N queens on an NxN
 chess board such that no queen can hit each other.
 
 22) SmithWaterman.java - Class to study dynamic programming to partially 
