@@ -126,9 +126,9 @@ public class NQueenProblem
     // 1st set of diagonals
     for(int i = 0; i < rows; i++)
     {
-			sum = 0;
-			for(int startR = i, startC = 0; startR < rows && startC < cols; startR++, startC++)
-			{ 
+      sum = 0;
+      for(int startR = i, startC = 0; startR < rows && startC < cols; startR++, startC++)
+      { 
         sum += board[startR][startC];
         if(sum > 1)
           return false;
