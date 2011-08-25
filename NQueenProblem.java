@@ -6,10 +6,10 @@
  */
 public class NQueenProblem
 {
-  private int rows; // Number of rows of board
-  private int cols; // Number of columns of board
-  
-  private int board[][]; // Game board
+  private int rows;             // Number of rows of board
+  private int cols;             // Number of columns of board
+  private int numSolutions = 0; // Number of solutions:w
+  private int board[][];        // Game board
   
   /**
    * Class constructor
@@ -54,54 +54,40 @@ public class NQueenProblem
   }
   
   /**
-   * Method to move the queen one position to right. If it exceeds beyond the
-   * boundary of the board, reset it to the left.
-   * @param row
-   * @param currCol
-   */
-  private void moveRight(int row, int currCol)
-  {
-    board[row][currCol] = 0;
-    currCol = (currCol + 1) % cols;
-    board[row][currCol] = 1;
-  }
-  
-  /**
    * Method to play the game of placing the queens
    */
   public void play()
   {
-    for(int i = 0; i < rows; i++)
-      board[i][0] = 1;
-    
-    placeQueen(0);
+    for(int j = 0; j < cols; j++)
+    {
+      board[0][j] = 1;
+      playRecursive(1);
+      board[0][j] = 0;
+    }
   }
   
-  /**
-   * Place queens recursively and check if solution is obtained. Current
-   * behavior is to exit on finding the first solution.
-   * @param queenNum
-   */
-  private void placeQueen(int queenNum)
+  private void playRecursive(int queenNum)
   {
     if(queenNum >= rows)
       return;
     for(int j = 0; j < cols; j++)
     {
-      if(!isBoardSafe())
+      board[queenNum][j] = 1;
+      
+      if(isBoardSafe())
       {
-        moveRight(queenNum, j);
-        placeQueen(queenNum + 1);
+        if(queenNum == rows -1)
+        {
+          System.out.println();
+          System.out.println("Solution : " + ++numSolutions);
+          printBoard();
+        }
+        else
+          playRecursive(queenNum + 1);
       }
-      else
-      {
-        System.out.println("F O U N D  T H E  S O L U T I O N");
-        printBoard();
-        System.exit(0);
-      }
+      board[queenNum][j] = 0;
     }
   }
-  
   
   /**
    * Method to check if the whole board is safe
@@ -137,12 +123,12 @@ public class NQueenProblem
     // 1st set of diagonals
     for(int i = 0; i < rows; i++)
     {
-    	sum = 0;
-    	for(int startR = i, startC = 0; startR < rows && startC < cols; startR++, startC++)
-    	{ 
+			sum = 0;
+			for(int startR = i, startC = 0; startR < rows && startC < cols; startR++, startC++)
+			{ 
            sum += board[startR][startC];
            if(sum > 1)
-        	   return false;
+					   return false;
         }
     }
     
@@ -154,7 +140,7 @@ public class NQueenProblem
       {
         sum += board[startR][startC];
         if(sum > 1)
-        	return false;
+					return false;
       }
     }
     
@@ -164,7 +150,7 @@ public class NQueenProblem
       sum = 0;
       for(int startC = cols -1, startR = i; startR < rows && startC >= 0; startR++, startC--)
       {
-    	sum += board[startR][startC];
+			sum += board[startR][startC];
         if(sum > 1)
           return false;
       }
@@ -213,3 +199,4 @@ public class NQueenProblem
     System.err.println("Enter the size of the board (i.e number of rows of the chess board)");
   }
 }
+
