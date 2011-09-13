@@ -79,3 +79,5 @@ chess board such that no queen can hit each other.
 
 22) SmithWaterman.java - Class to study dynamic programming to partially 
 match (align) 2 DNA strings using Smith-Waterman algorithm.
+
+23) removeDups.C - Method to remove duplicate characters from a C string.
