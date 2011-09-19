@@ -81,3 +81,6 @@ chess board such that no queen can hit each other.
 match (align) 2 DNA strings using Smith-Waterman algorithm.
 
 23) removeDups.C - Method to remove duplicate characters from a C string.
+
+24) ConvertIntToBinaryStr.java - Method to accept an integer and print its
+binary string representation.
