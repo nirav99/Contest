@@ -84,3 +84,6 @@ match (align) 2 DNA strings using Smith-Waterman algorithm.
 
 24) ConvertIntToBinaryStr.java - Method to accept an integer and print its
 binary string representation.
+
+25) Tree.java - Method to find lowest common ancestor of two nodes in a
+binary tree where the binary tree maynot be a binary search tree.
