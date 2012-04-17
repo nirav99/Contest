@@ -87,3 +87,56 @@ binary string representation.
 
 25) Tree.java - Method to find lowest common ancestor of two nodes in a
 binary tree where the binary tree maynot be a binary search tree.
+
+26) URLSorter.java - Source code at https://gist.github.com/2313463
+Given a large number of URLs, sort them based on their domain names.
+
+For example, if the input list of URLs is
+
+http://www.youtube.com/watch?v=9KR_OesLEWw&feature=g-vrec&context=G280bc82RVAAAAAAAAAA
+http://www.yahoo.com
+microsoft.com
+http://www.google.com
+github.com/drio
+http://www.youtube.com/watch?v=Clb7kN3xdII&feature=g-vrec&context=G244f6c0RVAAAAAAAACw
+www.microsoft.com/responsepoint
+http://google.com/214/2143/12323/232323/23
+http://www.youtube.com
+dropbox.com
+github.com/nirav99
+nirav99.github.com
+timesofindia.com
+www.wikipedia.org
+http://www.cnn.com
+www.nytimes.com
+www.utdallas.edu
+www.bcm.edu
+www.tamu.edu
+www.utexas.edu
+http://www.utdallas.edu/~bastani/
+
+The output should be
+
+www.bcm.edu
+http://www.cnn.com
+dropbox.com
+github.com/drio
+github.com/nirav99
+http://www.google.com
+http://google.com/214/2143/12323/232323/23
+microsoft.com
+www.microsoft.com/responsepoint
+nirav99.github.com
+www.nytimes.com
+www.tamu.edu
+timesofindia.com
+www.utdallas.edu
+http://www.utdallas.edu/~bastani/
+www.utexas.edu
+www.wikipedia.org
+http://www.yahoo.com
+http://www.youtube.com/watch?v=9KR_OesLEWw&feature=g-vrec&context=G280bc82RVAAAAAAAAAA
+http://www.youtube.com/watch?v=Clb7kN3xdII&feature=g-vrec&context=G244f6c0RVAAAAAAAACw
+http://www.youtube.com
+
+(There's no need to sort the URLs from the same domain alphabetically).
