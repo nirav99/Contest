@@ -74,57 +74,16 @@ are less than edit distance 2 from each other.
 20) MatrixAllPaths.java - Print all the paths in a 2D matrix from top-left to 
 bottom-right when only two operations move_down and move_right are allowed.
 
-21) NQueenProblem.java - Code to show one solution of placing N queens on an NxN
+21) NQueenProblem.java - Code to find all solutions of placing N queens on an NxN
 chess board such that no queen can hit each other.
 
-22) URLSorter.java - Given a list of millions of URLs, sort them based on their domain names. Source code at : https://gist.github.com/2313463
+22) SmithWaterman.java - Class to study dynamic programming to partially 
+match (align) 2 DNA strings using Smith-Waterman algorithm.
 
-For example, if the input list of URLs is
+23) removeDups.C - Method to remove duplicate characters from a C string.
 
-http://www.youtube.com/watch?v=9KR_OesLEWw&feature=g-vrec&context=G280bc82RVAAAAAAAAAA
-http://www.yahoo.com
-microsoft.com
-http://www.google.com
-github.com/drio
-http://www.youtube.com/watch?v=Clb7kN3xdII&feature=g-vrec&context=G244f6c0RVAAAAAAAACw
-www.microsoft.com/responsepoint
-http://google.com/214/2143/12323/232323/23
-http://www.youtube.com
-dropbox.com
-github.com/nirav99
-nirav99.github.com
-timesofindia.com
-www.wikipedia.org
-http://www.cnn.com
-www.nytimes.com
-www.utdallas.edu
-www.bcm.edu
-www.tamu.edu
-www.utexas.edu
-http://www.utdallas.edu/~bastani/
+24) ConvertIntToBinaryStr.java - Method to accept an integer and print its
+binary string representation.
 
-The output should be
-
-www.bcm.edu
-http://www.cnn.com
-dropbox.com
-github.com/drio
-github.com/nirav99
-http://www.google.com
-http://google.com/214/2143/12323/232323/23
-microsoft.com
-www.microsoft.com/responsepoint
-nirav99.github.com
-www.nytimes.com
-www.tamu.edu
-timesofindia.com
-www.utdallas.edu
-http://www.utdallas.edu/~bastani/
-www.utexas.edu
-www.wikipedia.org
-http://www.yahoo.com
-http://www.youtube.com/watch?v=9KR_OesLEWw&feature=g-vrec&context=G280bc82RVAAAAAAAAAA
-http://www.youtube.com/watch?v=Clb7kN3xdII&feature=g-vrec&context=G244f6c0RVAAAAAAAACw
-http://www.youtube.com
-
-(There's no need to sort the URLs from the same domain alphabetically).
+25) Tree.java - Method to find lowest common ancestor of two nodes in a
+binary tree where the binary tree maynot be a binary search tree.

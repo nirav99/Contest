@@ -8,19 +8,20 @@ void intToStr(int input, char str[])
   bool isNeg = false;
   char ch;
   unsigned int idx = 0;
+  long input2 = input;
 
-  if(input < 0)
+  if(input2 < 0)
   {
     isNeg = true;
-    input = input * -1;
+    input2 = input2 * -1;
   }
 
   do
   {
-    ch = input % 10 + '0';
-    input = input / 10;
+    ch = input2 % 10 + '0';
+    input2 = input2 / 10;
     str[idx++] = ch;
-  }while(input);
+  }while(input2);
 
   if(isNeg)
     str[idx++] = '-';

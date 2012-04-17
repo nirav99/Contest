@@ -8,7 +8,7 @@ public class NQueenProblem
 {
   private int rows; // Number of rows of board
   private int cols; // Number of columns of board
-  
+  private int numSolutions = 0; // Number of solutions
   private int board[][]; // Game board
   
   /**
@@ -32,7 +32,7 @@ public class NQueenProblem
   {
     for(int i = 0; i < rows; i++)
       for(int j = 0; j < cols; j++)
-         board[i][j] = 0;
+        board[i][j] = 0;
   }
  
   /**
@@ -40,6 +40,7 @@ public class NQueenProblem
    */
   public void printBoard()
   {
+    System.out.println("Solution : " + ++numSolutions);
     for(int i = 0; i < rows; i++)
     {
       for(int j = 0; j < cols; j++)
@@ -54,134 +55,101 @@ public class NQueenProblem
   }
   
   /**
-   * Method to move the queen one position to right. If it exceeds beyond the
-   * boundary of the board, reset it to the left.
-   * @param row
-   * @param currCol
-   */
-  private void moveRight(int row, int currCol)
-  {
-    board[row][currCol] = 0;
-    currCol = (currCol + 1) % cols;
-    board[row][currCol] = 1;
-  }
-  
-  /**
    * Method to play the game of placing the queens
    */
   public void play()
   {
-    for(int i = 0; i < rows; i++)
-      board[i][0] = 1;
-    
-    placeQueen(0);
+    for(int j = 0; j < cols; j++)
+    {
+      board[0][j] = 1;
+      playRecursive(1);
+      board[0][j] = 0;
+    }
   }
   
   /**
-   * Place queens recursively and check if solution is obtained. Current
-   * behavior is to exit on finding the first solution.
+   * Recursive method
    * @param queenNum
    */
-  private void placeQueen(int queenNum)
+  private void playRecursive(int queenNum)
   {
     if(queenNum >= rows)
       return;
     for(int j = 0; j < cols; j++)
     {
-      if(!isBoardSafe())
+      if(isPositionSafe(queenNum, j))
       {
-        moveRight(queenNum, j);
-        placeQueen(queenNum + 1);
+        board[queenNum][j] = 1;
+        if(queenNum == rows -1)
+          printBoard();
+        else
+          playRecursive(queenNum + 1);
       }
-      else
-      {
-        System.out.println("F O U N D  T H E  S O L U T I O N");
-        printBoard();
-        System.exit(0);
-      }
+      board[queenNum][j] = 0;
     }
   }
   
-  
   /**
-   * Method to check if the whole board is safe
+   * Check if the specified position is safe before actually placing the
+   * queen.
+   * @param r
+   * @param c
    * @return
    */
-  public boolean isBoardSafe()
+  public boolean isPositionSafe(int r, int c)
   {
     int sum = 0;
-    // Check row-wise
-    for(int i = 0; i < rows; i++)
-    {
-      sum = 0;
-      for(int j = 0; j < cols; j++)
-      {
-         sum += board[i][j];
-         if(sum > 1)
-           return false;
-      }
-    }
-    
-    // Check column-wise
+    // Check the row
     for(int j = 0; j < cols; j++)
     {
-      sum = 0;
-      for(int i = 0; i < rows; i++)
-      {
-        sum += board[i][j];
-        if(sum > 1)
-          return false;
-      }
+      sum += board[r][j];
+      
+      if(sum >= 1)
+        return false;
     }
     
-    // 1st set of diagonals
+    sum = 0;
+    // Check the column
     for(int i = 0; i < rows; i++)
     {
-    	sum = 0;
-    	for(int startR = i, startC = 0; startR < rows && startC < cols; startR++, startC++)
-    	{ 
-           sum += board[startR][startC];
-           if(sum > 1)
-        	   return false;
-        }
+      sum += board[i][c];
+      if(sum >= 1)
+        return false;
     }
     
-    //2nd set of diagonals
-    for(int j = 0; j < cols; j++)
+    sum = 0;
+    // Check the diagonal towards top left
+    for(int currR = r, currC = c; currR >= 0 && currC >= 0; currR--, currC--)
     {
-      sum = 0;
-      for(int startC = j, startR = 0; startR < rows && startC < cols; startR++, startC++)
-      {
-        sum += board[startR][startC];
-        if(sum > 1)
-        	return false;
-      }
+      sum += board[currR][currC];
+      if(sum >= 1)
+        return false;
     }
     
-    //3rd set of diagonals
-    for(int i = 0; i < rows; i++)
+ // Check the diagonal towards bottom right
+    for(int currR = r, currC = c; currR < rows && currC < cols; currR++, currC++)
     {
-      sum = 0;
-      for(int startC = cols -1, startR = i; startR < rows && startC >= 0; startR++, startC--)
-      {
-    	sum += board[startR][startC];
-        if(sum > 1)
-          return false;
-      }
+      sum += board[currR][currC];
+      if(sum >= 1)
+        return false;
     }
     
-    //4th set of diagonals
-    for(int j = cols -1; j >= 0; j--)
+    sum = 0;
+    // Check the diagonal towards top right
+    for(int currR = r, currC = c; currR >= 0 && currC < cols; currR--, currC++)
     {
-      sum = 0;
-      for(int startR = 0, startC = j; startR < rows & startC >= 0; startR++, startC--)
-      {
-        sum += board[startR][startC];
-        if(sum > 1)
-          return false;
-      }
+      sum += board[currR][currC];
+      if(sum >= 1)
+        return false;
     }
-    // No errors found, return true
+    
+    // Check the diagonal towards bottom left
+    for(int currR = r, currC = c; currR < rows && currC >= 0; currR++, currC--)
+    {
+      sum = board[currR][currC];
+      if(sum >= 1)
+        return false;
+    }
     return true;
   }
   
@@ -193,14 +161,14 @@ public class NQueenProblem
       System.exit(-1);
     }
     
-	int size = Integer.parseInt(args[0]);
-	
-	if(size == 2 || size == 3)
-	{
+    int size = Integer.parseInt(args[0]);
+
+    if(size == 2 || size == 3)
+    {
       System.out.println("No solution exists for board size " + size);
       System.exit(0);
-	}
-	
+    }
+
     NQueenProblem p = new NQueenProblem(size, size);
     p.play();
   }
@@ -213,3 +181,4 @@ public class NQueenProblem
     System.err.println("Enter the size of the board (i.e number of rows of the chess board)");
   }
 }
+
