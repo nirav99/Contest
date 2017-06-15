@@ -1,0 +1,193 @@
+import java.util.*;
+
+/**
+ * We want to lay train tracks between several European cities such that the cost of laying the tracks is minimized.
+ * We are given city pairs and the cost of laying tracks between them.
+ * Implemented using Kruskal's min. spanning tree algorithm.
+ * @author nirav99
+ *
+ */
+public class MinSpanningTreeKruskals
+{
+  private PriorityQueue<Edge> pq;
+  private HashMap<String, Integer> nodeMap;
+  
+  private ArrayList<Edge> minSpanningTree;
+  
+  private int[] clusters;
+  
+  public MinSpanningTreeKruskals()
+  {
+  	pq = new PriorityQueue<Edge>(100, new EdgeComparator());
+  	nodeMap = new HashMap<String, Integer>();
+  	minSpanningTree = new ArrayList<Edge>();
+  }
+  
+  /**
+   * Adds an edge.
+   * @param source
+   * @param dest
+   * @param cost
+   */
+  public void addEdge(String source, String dest, int cost)
+  {
+  	addToNodeMap(source);
+  	addToNodeMap(dest);
+  	pq.add(new Edge(source, dest, cost));
+  }
+  
+  /**
+   * Calculates the Min. spanning tree
+   */
+  public void getSpanningTree()
+  {
+  	clusters = new int[nodeMap.size()];
+  	
+  	for(int i = 0; i < clusters.length; i++)
+  		clusters[i] = i + 1;
+  	
+  	int V = nodeMap.size(); // V represents total nodes
+  	int numEdgesSelected = 0;
+  	
+  	while(numEdgesSelected < V - 1)
+  	{
+  		Edge minEdge = pq.poll();
+  		
+  		if(minEdge == null)
+  			break;
+  		
+  		if(allowedToMerge(minEdge))
+  		{
+  			merge(minEdge.source, minEdge.dest);
+  			numEdgesSelected++;
+  			minSpanningTree.add(minEdge);
+  		}
+  	}
+  	System.out.println("Min. spanning tree : ");
+  	printTree();
+  }
+  
+  /**
+   * Returns true if the nodes represented by the edge can be merged, i.e. if Edge edge can be accepted
+   * without creating cycles.
+   * @param edge
+   * @return
+   */
+  private boolean allowedToMerge(Edge edge)
+  {
+  	int sourceCluster = clusters[nodeMap.get(edge.source) -1];
+  	int destCluster = clusters[nodeMap.get(edge.dest) -1];
+  	
+  	return sourceCluster != destCluster;
+  }
+  
+  /**
+   * Merges the two sub-trees
+   * @param source
+   * @param dest
+   */
+  private void merge(String source, String dest)
+  {
+  	int sourceCluster = clusters[nodeMap.get(source) -1];
+  	int destCluster = clusters[nodeMap.get(dest) -1];
+  	
+  	if(sourceCluster < destCluster)
+  		mergeHelper(sourceCluster, destCluster);
+  	else
+  		mergeHelper(destCluster, sourceCluster);
+  }
+  
+  /**
+   * Helper method for the merge method
+   * @param sourceCluster
+   * @param destCluster
+   */
+  private void mergeHelper(int sourceCluster, int destCluster)
+  {
+    for(int i = 0; i < clusters.length; i++)
+    {
+    	if(clusters[i] == destCluster)
+    		clusters[i] = sourceCluster;
+    }
+  }
+  
+  private void addToNodeMap(String node)
+  {
+  	Integer value = nodeMap.get(node);
+  	
+  	if(value == null)
+  	{
+  		value = nodeMap.size() + 1;
+  		nodeMap.put(node, value);
+  	}
+  }
+  
+  private void printTree()
+  {
+    for(Edge e : minSpanningTree)
+    	System.out.println(e);
+  }
+  
+  public static void main(String[] args)
+  {
+  	try
+  	{
+  		MinSpanningTreeKruskals mst = new MinSpanningTreeKruskals();
+  		mst.addEdge("London", "Paris", 300);
+  		mst.addEdge("London", "Brussels", 300);
+  		mst.addEdge("Brussels", "Paris", 100);
+  		mst.addEdge("Brussels", "Amsterdam", 250);
+  		mst.addEdge("Brussels", "Koln", 150);
+  		mst.addEdge("Paris", "Koln", 350);
+  		mst.addEdge("Amsterdam", "Koln", 400);
+  		mst.addEdge("Hamburg", "Koln", 400);
+  		mst.addEdge("Hamburg", "Amsterdam", 200);
+  		mst.addEdge("Paris", "Frankfurt", 450);
+  		mst.addEdge("Brussels", "Frankfurt", 500);
+  		mst.addEdge("Koln", "Frankfurt", 250);
+  		
+  		mst.getSpanningTree();
+  	}
+  	catch(Exception e)
+  	{
+  		e.printStackTrace();
+  	}
+  }
+}
+
+class Edge
+{
+	String source;
+	String dest;
+	int cost;
+	
+	Edge(String s, String d, int c)
+	{
+		this.source = s;
+		this.dest = d;
+		this.cost = c;
+	}
+	
+	@Override
+	public String toString()
+	{
+		return source + "  <-> " + dest + " : " + cost;
+	}
+}
+
+class EdgeComparator implements Comparator<Edge>
+{
+
+	@Override
+	public int compare(Edge e1, Edge e2)
+	{
+    if(e1.cost < e2.cost)
+    	return -1;
+    else
+    if(e1.cost > e2.cost)
+    	return 1;
+    else
+    	return 0;
+	}
+	
+}
