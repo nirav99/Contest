@@ -1,0 +1,52 @@
+/**
+ * Find the maxinum length substring that is repeated in the given string.
+ * e.g. given abcbca, return bc
+ * @author nirav99
+ *
+ */
+public class MaxLengthRepeatedSubstring
+{
+	private static String maxLengthRepeatedSubstring(String input)
+	{
+	  int maxLen = 0;
+	  String maxString = null;
+	  
+	  for(int len = 1; len <= input.length() / 2; len++)
+	  {
+	  	for(int start = 0; start < input.length() - len + 1; start++)
+	  	{
+	  		String subString = input.substring(start, start + len);
+	  		
+	  		if(start + 1 < input.length())
+	  		{
+	  		  String newString = input.substring(start + 1);
+	  		  
+	  		  if(newString.contains(subString) && maxLen < subString.length())
+	  		  {
+	  		  	maxLen = subString.length();
+	  		  	maxString = subString;
+	  		  }
+	  		}
+	  	}
+	  }
+	  
+	  return maxString;
+	}
+	
+  public static void main(String[] arg)
+  {
+  	try
+  	{
+  		String[] inputs = {"abca", "abcbca", "abc", "merlinmerlin", "merlinarthurmerlin", "merlionmerlin", "abcdd"};
+//  		String[] inputs = {"abcbca"};
+  		for(String input : inputs)
+  		{
+  			System.out.println(input + " -> " + maxLengthRepeatedSubstring(input));
+  		}
+  	}
+  	catch(Exception e)
+  	{
+  		e.printStackTrace();
+  	}
+  }
+}
