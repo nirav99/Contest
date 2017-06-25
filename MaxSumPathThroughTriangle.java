@@ -1,98 +1,83 @@
 import java.util.*;
 
+/**
+ * Given a trianble, calculate the maxinum sum of the values in the triangle
+ * by adding value of current element to its left parent, vertical parent or right parent.
+ * i.e. for
+ * value_triangle[i][j] = triangle[i][j] + max{triangle[i -1][j -1], triangle[i -1][j], triangle[i -1][j + 1]}
+ * The solution is based on dynamic programming.
+ * @author nirav99
+ *
+ */
 public class MaxSumPathThroughTriangle
 {
   private int[][] triangle;
-  private int maxSum = 0;
+  private int maxRows;
   
-  private HashMap<String, Integer> sumMap;
+  private int[][] cost;
   
   public MaxSumPathThroughTriangle(int[][] triangle)
   {
+  	maxRows = triangle.length;
+  	
     this.triangle = triangle;
-    sumMap = new HashMap<String, Integer>();
-    calculateSum();
-  }
-  
-  public int maxSum()
-  {
-    return this.maxSum;
-  }
-  
-  private void calculateSum()
-  {
-    int[] colArray;
-    int currSum;
     
+    cost = new int[maxRows][maxRows];
     
-    for(int i = 0; i < triangle.length; i++)
+    for(int i = 0; i < maxRows; i++)
     {
-      colArray = triangle[i];
-      
-      for(int j = 0; j < colArray.length; j++)
-      {
-        currSum = colArray[j] + maxParentsSum(i, j, colArray.length);
-        
-        putSum(i, j, currSum);
-        
-        if(currSum > maxSum)
-          maxSum = currSum;
-      }
+    	for(int j = 0; j < maxRows; j++)
+    		cost[i][j] = 0;
+    }
+  }
+  
+  public int calculateMaxSumPath()
+  {
+    for(int i = 0; i < maxRows; i++)
+    {
+    	for(int j = 0; j <= i; j++)
+    	{
+    		cost[i][j] = getMaxParentSum(i, j) + triangle[i][j];
+    	}
+    }
+
+    int maxSum = cost[maxRows - 1][0];
+    
+    for(int i = 1; i < maxRows; i++)
+    {
+    	if(maxSum < cost[maxRows - 1][i])
+    	  maxSum = cost[maxRows - 1][i];
     }
     
-    Set<Map.Entry<String, Integer>> entrySet = sumMap.entrySet();
-    
-    System.out.println("Hashmap values = ");
-    for(Map.Entry<String, Integer> entry : entrySet)
-      System.out.println(entry.getKey() + " --> " + entry.getValue());
+    return maxSum;
   }
   
-  private int maxParentsSum(int i, int j, int length)
+  private int getMaxParentSum(int i, int j)
   {
-    int parentRow = i - 1;
-    int parentCol;
-    int[] parentSum = new int[3];
-    int parentLength = length - 1;
+    int[] parentArray = new int[3];
     
-    if(parentRow >= 0)
+    Arrays.fill(parentArray, 0);
+    
+    if(i - 1 >= 0)
     {
-      parentCol = j -1;
-      if(parentCol >= 0)
-        parentSum[0] = getSum(parentRow, parentCol);
-      parentCol = j;
-      
-      if(parentCol < parentLength)
-      {
-        parentSum[1] = getSum(parentRow, parentCol);
-        parentCol = j + 1;
-        if(parentCol < parentLength)
-          parentSum[2] = getSum(parentRow, parentCol);
-      }
+    	if(j - 1 >= 0)
+    		parentArray[0] = cost[i - 1][j - 1];
+    	
+    	parentArray[1] = cost[i - 1][j];
+    	
+    	if(j + 1 <= maxRows - 1)
+    		parentArray[2] = cost[i - 1][j + 1];
     }
     
-    int max = parentSum[0];
+    int max = parentArray[0];
     
-    if(parentSum[1] > max)
-      max = parentSum[1];
-    if(parentSum[2] > max)
-      max = parentSum[2];
+    for(int index = 1; index < parentArray.length; index++)
+    {
+    	if(max < parentArray[index])
+    		max = parentArray[index];
+    }
     
     return max;
-  }
-  
-  private int getSum(int i, int j)
-  {
-    String key = i + "_" + j;
-    
-    Integer value = sumMap.get(key);
-    
-    return (value != null) ? value : 0;
-  }
-  
-  private void putSum(int i, int j, int sum)
-  {
-    String key = i + "_" + j;
-    sumMap.put(key, sum);
   }
   
   public static void main(String[] args)
@@ -102,7 +87,7 @@ public class MaxSumPathThroughTriangle
       int[][] triangle = { {1}, {2,3}, {4, 5, 6}, {7, 10, 9, 8}};
    
       MaxSumPathThroughTriangle maxSum = new MaxSumPathThroughTriangle(triangle);
-      System.out.println("MAX SUM = " + maxSum.maxSum());
+      System.out.println("MAX SUM = " + maxSum.calculateMaxSumPath());
     }
     catch(Exception e)
     {
