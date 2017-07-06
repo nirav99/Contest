@@ -1,5 +1,8 @@
+import java.util.*;
+
 /**
  * Given a set of strings, find the longest common prefix.
+ * Also, find all the words rooted at the given prefix.
  * Time complexity:
  * M = length of the largest string
  * N = total number of strings (words)
@@ -22,6 +25,8 @@ public class LongestCommonPrefix
   			trie.addWord(word);
   		
   		System.out.println("The longest common prefix : " + trie.longestCommonPrefix());
+  		
+  		trie.findAllWordsWithGivePrefix("g");
   	}
   	catch(Exception e)
   	{
@@ -33,6 +38,8 @@ public class LongestCommonPrefix
 class Trie
 {
 	private TrieNode root;
+	
+	private HashSet<String> wordSet;
 	
 	public Trie()
 	{
@@ -86,6 +93,68 @@ class Trie
 	}
 	
 	/**
+	 * Finds all the words in the Trie with the given prefix
+	 * @param prefix
+	 */
+	public void findAllWordsWithGivePrefix(String prefix)
+	{
+		wordSet = new HashSet<String>();
+		
+		TrieNode trav = root;
+		boolean prefixFound = true;
+		
+		for(int i = 0; i < prefix.length(); i++)
+		{
+			int index = prefix.charAt(i) - 'a';
+			
+			if(trav.children[index] != null)
+			  trav = trav.children[index];
+			else
+			{
+				prefixFound = false;
+				break;
+			}
+		}
+		
+		if(prefixFound == false)
+		{
+			System.out.println("Words with prefix : " + prefix + " absent.");
+		}
+		else
+		{
+			findWords(trav, prefix);
+		
+		  System.out.println("Words with prefix : " + prefix + " :");
+		
+		  for(String word : wordSet)
+			  System.out.println("  " + word);
+		}
+	}
+	
+	/**
+	 * Recursive method to find all the words from the given prefix and given start node
+	 * @param trav
+	 * @param word
+	 */
+	private void findWords(TrieNode trav, String word)
+	{
+		if(trav.isLeaf)
+		{
+			wordSet.add(word);
+		}
+		TrieNode[] children = trav.children;
+		
+		for(int i = 0; i < children.length; i++)
+		{
+			if(children[i] != null)
+			{
+				char ch = (char)(i + 'a');
+				findWords(children[i], word + ch);
+			}
+		}
+	}
+	
+	/**
 	 * Counts the number of children of the given trie node
 	 * @param trav
 	 * @return
@@ -111,6 +180,8 @@ class Trie
 		}
 		return -1;
 	}
+	
+	
 	/**
 	 * A single Trie node
 	 * @author nirav99
