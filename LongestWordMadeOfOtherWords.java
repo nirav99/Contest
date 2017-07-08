@@ -2,6 +2,8 @@ import java.util.*;
 
 /**
  * Given a set of words, find the longest word that is composed of other words in the given set.
+ * e.g. given test, tester, testing, testertest, testingtester.
+ * return testingtester.
  * @author nirav99
  *
  */
