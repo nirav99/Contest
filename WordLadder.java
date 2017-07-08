@@ -25,14 +25,14 @@ public class WordLadder
   
   class State
   {
-  	String word;
-  	int numSteps;
-  	
-  	State(String word, int numSteps)
-  	{
-  		this.word = word;
-  		this.numSteps = numSteps;
-  	}
+    String word;
+    int numSteps;
+    
+    State(String word, int numSteps)
+    {
+      this.word = word;
+      this.numSteps = numSteps;
+    }
   }
   
   /**
@@ -40,13 +40,13 @@ public class WordLadder
    */
   public void playLadder(String startWord, String endWord)
   {
-  	this.startWord = startWord;
-  	this.endWord = endWord;
-  	
+    this.startWord = startWord;
+    this.endWord = endWord;
+    
     this.seenWords = new HashSet<String>();
     backTrackMap = new HashMap<String, String>();
     
-  	System.out.println("\nStart word : " + startWord + " End word : " + endWord);
+    System.out.println("\nStart word : " + startWord + " End word : " + endWord);
     Queue<State> queue = new ArrayDeque<State>();
     queue.add(new State(startWord, 0));
     seenWords.add(startWord);
@@ -59,27 +59,27 @@ public class WordLadder
       
       if(state.word.equals(endWord))
       {
-      	System.out.println("Found end word " + endWord + "\nNum Transformations : " + state.numSteps);
-      	listTransformations();
-      	return;
+        System.out.println("Found end word " + endWord + "\nNum Transformations : " + state.numSteps);
+        listTransformations();
+        return;
       }
       currWord = state.word;
       
       for(int i = 0; i < currWord.length(); i++)
       {
-      	for(int j = 0; j < ALPHABET.length(); j++)
-      	{
-      		StringBuilder newWord = new StringBuilder(currWord);
-      		newWord.replace(i, i + 1, ALPHABET.substring(j, j + 1));
-      		
-      		if(!seenWords.contains(newWord.toString()) && dictionary.contains(newWord.toString()))
-      		{
-//      			System.out.println("Adding : " + newWord.toString());
-      			queue.add(new State(newWord.toString(), state.numSteps + 1));
-      			seenWords.add(newWord.toString());
-      			backTrackMap.put(newWord.toString(), currWord);
-      		}
-      	}
+        for(int j = 0; j < ALPHABET.length(); j++)
+        {
+          StringBuilder newWord = new StringBuilder(currWord);
+          newWord.replace(i, i + 1, ALPHABET.substring(j, j + 1));
+          
+          if(!seenWords.contains(newWord.toString()) && dictionary.contains(newWord.toString()))
+          {
+//            System.out.println("Adding : " + newWord.toString());
+            queue.add(new State(newWord.toString(), state.numSteps + 1));
+            seenWords.add(newWord.toString());
+            backTrackMap.put(newWord.toString(), currWord);
+          }
+        }
       }
     }
   }
@@ -97,23 +97,23 @@ public class WordLadder
  
     while(true)
     {
-    	String prevWord = backTrackMap.get(currWord);
-    	list.add(prevWord);
-    	currWord = prevWord;
-    	
-    	if(currWord.equals(startWord))
-    		break;
+      String prevWord = backTrackMap.get(currWord);
+      list.add(prevWord);
+      currWord = prevWord;
+      
+      if(currWord.equals(startWord))
+        break;
     }
     
     for(int i = list.size() - 1; i > 0; i--)
-    	System.out.print(list.get(i) + " -> ");
+      System.out.print(list.get(i) + " -> ");
     System.out.println(list.get(0));
   }
   
-	public static void main(String[] args)
-	{
-		try
-		{
+  public static void main(String[] args)
+  {
+    try
+    {
       String[] wordList = {"hot","dot","dog","lot","log","cog", "lamp", "camp", "line", "lime", "limp", "like", "pit", "pot"};
       
       HashSet<String> dictionary = new HashSet<String>();
@@ -123,10 +123,10 @@ public class WordLadder
       wordLadder.playLadder("hit", "cog");
       wordLadder.playLadder("damp", "like");
       wordLadder.playLadder("hit", "pot");
-		}
-		catch(Exception e)
-		{
-			e.printStackTrace();
-		}
-	}
+    }
+    catch(Exception e)
+    {
+      e.printStackTrace();
+    }
+  }
 }
